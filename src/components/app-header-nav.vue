@@ -1,9 +1,3 @@
-<script>
-export default {
-  name: "app-header-nav",
-};
-</script>
-
 <script setup></script>
 
 <template>

@@ -1,6 +1,7 @@
 <script setup>
 import AppHeaderNav from "./app-header-nav.vue";
 </script>
+
 <template>
   <header class="app-header">
     <div class="container">

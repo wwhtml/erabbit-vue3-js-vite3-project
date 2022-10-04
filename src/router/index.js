@@ -10,6 +10,7 @@ const Home = () => import("@/views/home/index.vue");
 const routes = [
   {
     path: "/",
+    name: "layout",
     component: Layout,
     children: [{ path: "/", component: Home }],
   },
