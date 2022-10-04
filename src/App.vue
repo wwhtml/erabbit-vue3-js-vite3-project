@@ -3,7 +3,6 @@ import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
-  <!-- 一级路由 -->
   <RouterView />
 </template>
 
@@ -22,6 +21,6 @@ const setUser = () => {
 </script>
 
 <template>
-  {{ userStore.user.profile }}
+  {{ userStore.profile }}
   <button @click="setUser">setUser</button>
 </template> -->

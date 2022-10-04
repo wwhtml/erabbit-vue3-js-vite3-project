@@ -1,18 +1,18 @@
 import { defineStore } from "pinia";
 
-export const useCartStore = defineStore("CartStore", {
+export const useCartStore = defineStore("cart", {
   state: () => {
     return {
       //购物车数据集合
-      cart: {
-        list: [{ id: 1 }],
-      },
+      // cart: {
+      list: [{ id: 1 }],
+      // },
     };
   },
   // persist: true,
 
   persist: {
-    key: "userState",
+    key: "errabit-cart",
     path: ["cart"],
   },
   // persist: {
@@ -22,7 +22,7 @@ export const useCartStore = defineStore("CartStore", {
 
   actions: {
     addCart() {
-      this.cart.list = [{ id: 2 }];
+      this.list = [{ id: 2 }];
     },
   },
 });

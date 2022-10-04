@@ -3,6 +3,17 @@ import { RouterView } from "vue-router";
 import AppTopNav from "@/components/app-top-nav.vue";
 import AppHeader from "@/components/app-header.vue";
 import AppFooter from "@/components/app-footer.vue";
+
+import { nextTick } from "vue";
+
+//引入categoryStore
+import { useCategoryStore } from "../stores/category";
+
+const categoryStore = useCategoryStore();
+
+nextTick(() => {
+  categoryStore.getList();
+});
 </script>
 
 <template>
