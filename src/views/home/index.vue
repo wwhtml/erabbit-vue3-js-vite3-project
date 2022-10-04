@@ -1,3 +1,8 @@
+<script>
+export default {
+  name: "xtx-home-page",
+};
+</script>
 <script setup></script>
 
 <template>
