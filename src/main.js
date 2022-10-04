@@ -5,7 +5,7 @@ import App from "./App.vue";
 import router from "./router";
 
 import "normalize.css";
-// import "@/assets/styles/common.less";
+import "@/assets/styles/common.less";
 
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 

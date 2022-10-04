@@ -1,13 +1,14 @@
-<!-- <script setup>
+<script setup>
 import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
+  <!-- 一级路由 -->
   <RouterView />
-</template> -->
+</template>
 
 <!-- 测试 -->
-<script setup>
+<!-- <script setup>
 import { RouterLink, RouterView } from "vue-router";
 import { useUserStore } from "./stores/user";
 import { useCartStore } from "./stores/cart";
@@ -23,4 +24,4 @@ const setUser = () => {
 <template>
   {{ userStore.user.profile }}
   <button @click="setUser">setUser</button>
-</template>
+</template> -->
