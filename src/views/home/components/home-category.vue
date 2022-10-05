@@ -33,7 +33,7 @@ const currCategory = computed(() => {
 });
 
 findBrand().then((data) => {
-  brand.brands = data.result.splice(0, 6);
+  brand.brands = data.result.slice(0, 6);
 });
 </script>
 
