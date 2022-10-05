@@ -1,31 +1,3 @@
-<script>
-export default {
-  name: "XtxSkeleton",
-};
-</script>
-
-<script setup>
-import { defineProps } from "vue";
-defineProps({
-  bg: {
-    type: String,
-    default: "#efefef",
-  },
-  width: {
-    type: String,
-    default: "100px",
-  },
-  height: {
-    type: String,
-    default: "100px",
-  },
-  animated: {
-    type: Boolean,
-    default: false,
-  },
-});
-</script>
-
 <template>
   <div
     class="xtx-skeleton"
@@ -37,7 +9,30 @@ defineProps({
     <!-- 2 闪效果 xtx-skeleton 伪元素 --->
   </div>
 </template>
-
+<script>
+export default {
+  name: "XtxSkeleton",
+  // 使用的时候需要动态设置 高度，宽度，背景颜色，是否闪下
+  props: {
+    bg: {
+      type: String,
+      default: "#efefef",
+    },
+    width: {
+      type: String,
+      default: "100px",
+    },
+    height: {
+      type: String,
+      default: "100px",
+    },
+    animated: {
+      type: Boolean,
+      default: false,
+    },
+  },
+};
+</script>
 <style scoped lang="less">
 .xtx-skeleton {
   display: inline-block;
