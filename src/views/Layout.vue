@@ -9,8 +9,8 @@ import { nextTick } from "vue";
 //引入categoryStore
 import { useCategoryStore } from "../stores/category";
 
+//使用categoryStroe,获取后端分类信息
 const categoryStore = useCategoryStore();
-
 nextTick(() => {
   categoryStore.getList();
 });

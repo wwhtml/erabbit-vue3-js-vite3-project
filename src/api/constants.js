@@ -1,6 +1,6 @@
 // 顶级分类
 export const topCategory = [
-  "居家",
+  "居1",
   "美食",
   "服饰",
   "母婴",
