@@ -20,8 +20,22 @@ export const useCategoryStore = defineStore("category", {
 
     async getList() {
       const { result } = await findAllCategory();
-      // 获取数据成功，提交mutations进行数据修改
+      //添加open属性
+      result.forEach((item) => {
+        item.open = false;
+      });
+      // 获取数据成功
       this.setCategory(result);
+    },
+
+    //控制属性open,控制是否打开二级导航
+    show(item) {
+      const category = this.list.find((category) => category.id === item.id);
+      category.open = true;
+    },
+    hide(item) {
+      const category = this.list.find((category) => category.id === item.id);
+      category.open = false;
     },
   },
 });

@@ -9,17 +9,34 @@ const categoryStore = useCategoryStore();
 const { list } = storeToRefs(categoryStore);
 
 console.log(list);
+
+//点击导航的a标签，让二级导航隐藏，通过一个open属性来控制，显示/隐藏（在categoryStore中设置）
+const show = (item) => {
+  console.log(11111);
+  categoryStore.show(item);
+};
+
+const hide = (item) => {
+  categoryStore.hide(item);
+};
 </script>
 
 <template>
   <ul class="app-header-nav">
     <li class="home"><RouterLink to="/">首页</RouterLink></li>
-    <li v-for="item in list" :key="item.id">
-      <RouterLink :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
-      <div class="layer">
+    <li
+      v-for="item in list"
+      :key="item.id"
+      @mouseenter="show(item)"
+      @mouseleave="hide(item)"
+    >
+      <RouterLink :to="`/category/${item.id}`" @click="hide(item)">{{
+        item.name
+      }}</RouterLink>
+      <div class="layer" :class="{ open: item.open }">
         <ul>
           <li v-for="sub in item.children" :key="sub.id">
-            <RouterLink :to="`/category/sub/${sub.id}`">
+            <RouterLink :to="`/category/sub/${sub.id}`" @click="hide(item)">
               <img :src="sub.picture" alt="" />
               <p>{{ sub.name }}</p>
             </RouterLink>
@@ -53,14 +70,18 @@ console.log(list);
         color: @xtxColor;
         border-bottom: 1px solid @xtxColor;
       }
-      > .layer {
-        height: 132px;
-        opacity: 1;
-      }
+      // > .layer {
+      //   height: 132px;
+      //   opacity: 1;
+      // }
     }
   }
 }
 .layer {
+  &.open {
+    height: 132px;
+    opacity: 1;
+  }
   width: 1240px;
   background-color: #fff;
   position: absolute;
