@@ -1,12 +1,16 @@
 <script>
 export default {
-  name: "xtx-home-page",
+  name: "PageHome",
 };
 </script>
 <script setup></script>
 
 <template>
-  <div class="xtx-home-page">首页</div>
+  <div class="home-page">首页</div>
 </template>
 
-<style scoped></style>
+<style scoped lang="less">
+.home-page {
+  height: 500px;
+}
+</style>

@@ -1,14 +1,12 @@
 <script setup>
 /* 为了从 Store 中提取属性同时保持其响应式，您需要使用storeToRefs()。 它将为任何响应式属性创建 refs。 */
 import { storeToRefs } from "pinia";
-import { computed, nextTick } from "vue";
 import { useCategoryStore } from "../stores/category";
 
 const categoryStore = useCategoryStore();
 
+//引入categoryList
 const { list } = storeToRefs(categoryStore);
-
-console.log(list);
 
 //点击导航的a标签，让二级导航隐藏，通过一个open属性来控制，显示/隐藏（在categoryStore中设置）
 const show = (item) => {
