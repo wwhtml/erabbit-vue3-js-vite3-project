@@ -1,12 +1,16 @@
-<script>
-export default {
-  name: "PageHome",
-};
+<script setup>
+import HomeCategory from "./components/home-category.vue";
 </script>
-<script setup></script>
 
 <template>
-  <div class="home-page">首页</div>
+  <div class="page-home">
+    <div class="home-entry">
+      <div class="container">
+        <!-- 左侧分类 -->
+        <HomeCategory />
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="less">
