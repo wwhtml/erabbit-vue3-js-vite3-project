@@ -8,16 +8,12 @@ import HomeBanner from "./components/home-banner.vue";
     <div class="home-entry">
       <div class="container">
         <!-- 左侧分类 -->
-        <HomeCategory />
+        <HomeCategory></HomeCategory>
         <!-- 轮播图 -->
-        <HomeBanner />
+        <HomeBanner></HomeBanner>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped lang="less">
-.home-page {
-  height: 500px;
-}
-</style>
+<style scoped lang="less"></style>

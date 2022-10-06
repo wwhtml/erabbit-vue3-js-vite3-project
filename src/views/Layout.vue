@@ -3,6 +3,7 @@ import { RouterView } from "vue-router";
 import AppTopNav from "@/components/app-top-nav.vue";
 import AppHeader from "@/components/app-header.vue";
 import AppFooter from "@/components/app-footer.vue";
+import AppHeaderSticky from "@/components/app-header-sticky.vue";
 
 import { nextTick } from "vue";
 
@@ -17,19 +18,24 @@ nextTick(() => {
 </script>
 
 <template>
-  <!-- app-top-nav.vue -->
+  <!-- 顶部通栏 -->
   <AppTopNav></AppTopNav>
-  <!-- app-header -->
+  <!-- 头部组件 -->
   <AppHeader></AppHeader>
-  <main>
+  <!-- 吸顶头部 -->
+  <AppHeaderSticky></AppHeaderSticky>
+
+  <!-- 主体内容 -->
+  <main class="app-body">
+    <!-- 二级路由 -->
     <RouterView />
   </main>
-  <!-- app-footer -->
+  <!-- 底部组件 -->
   <AppFooter></AppFooter>
 </template>
 
 <style scoped lang="less">
-nav {
-  color: @xtxColor;
+.app-body {
+  min-height: 600px;
 }
 </style>

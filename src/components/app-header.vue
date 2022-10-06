@@ -1,6 +1,5 @@
 <script setup>
 import AppHeaderNav from "./app-header-nav.vue";
-import AppHeaderSticky from "./app-header-sticky.vue";
 </script>
 
 <template>
@@ -8,7 +7,6 @@ import AppHeaderSticky from "./app-header-sticky.vue";
     <div class="container">
       <h1 class="logo"><RouterLink to="/">小兔鲜</RouterLink></h1>
       <AppHeaderNav></AppHeaderNav>
-      <AppHeaderSticky></AppHeaderSticky>
       <div class="search">
         <i class="iconfont icon-search"></i>
         <input type="text" placeholder="搜一搜" />
