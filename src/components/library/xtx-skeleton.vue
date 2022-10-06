@@ -1,11 +1,5 @@
-<script>
-export default {
-  name: "XtxSkeleton",
-};
-</script>
-
 <script setup>
-import { defineProps } from "vue";
+//defineProps:属性不需要显示的引入
 defineProps({
   bg: {
     type: String,
