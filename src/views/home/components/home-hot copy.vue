@@ -4,9 +4,20 @@ import HomePanel from "./home-panel.vue";
 import { findHot } from "@/api/home";
 import HomeSkeleton from "./home-skeleton.vue";
 
-import { useLazyData } from "@/hooks/index.js";
+import { useIntersectionObserver } from "@vueuse/core";
+const goods = ref([]);
 
-const { target, result: goods } = useLazyData(findHot);
+//dom
+const target = ref(null);
+
+const { stop } = useIntersectionObserver(target, ([{ isIntersecting }]) => {
+  if (isIntersecting) {
+    stop();
+    findHot().then((data) => {
+      goods.value = data.result;
+    });
+  }
+});
 </script>
 
 <template>

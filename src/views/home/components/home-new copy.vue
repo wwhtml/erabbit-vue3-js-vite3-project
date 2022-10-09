@@ -4,9 +4,21 @@ import HomeSkeleton from "./home-skeleton.vue";
 
 import { ref } from "vue";
 import { findNew } from "@/api/home";
-import { useLazyData } from "@/hooks/index.js";
+import { useIntersectionObserver } from "@vueuse/core";
 
-const { target, result: goods } = useLazyData(findNew);
+const goods = ref([]);
+
+//dom
+const target = ref(null);
+
+const { stop } = useIntersectionObserver(target, ([{ isIntersecting }]) => {
+  if (isIntersecting) {
+    stop();
+    findNew().then((data) => {
+      goods.value = data.result;
+    });
+  }
+});
 </script>
 
 <template>
