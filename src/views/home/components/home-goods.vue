@@ -10,7 +10,7 @@ const props = defineProps({
 <template>
   <div class="goods-item">
     <RouterLink to="/" class="image">
-      <img :src="goods.picture" alt="" />
+      <img alt="" v-lazy="goods.picture" />
     </RouterLink>
     <p class="name ellipsis-2">{{ goods.name }}</p>
     <p class="desc">{{ goods.tag }}</p>

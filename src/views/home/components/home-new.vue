@@ -20,7 +20,7 @@ const { target, result: goods } = useLazyData(findNew);
             <li v-for="item in goods" :key="item.id">
               <!-- <RouterLink :to="`/product/${item.id}`"> -->
               <RouterLink to="/">
-                <img :src="item.picture" alt="" />
+                <img v-lazy="item.picture" alt="" />
                 <p class="name ellipsis">{{ item.name }}</p>
                 <p class="price">&yen;{{ item.price }}</p>
               </RouterLink>

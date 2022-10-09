@@ -18,7 +18,7 @@ const { target, result: list } = useLazyData(findGoods);
       </template>
       <div class="box">
         <RouterLink class="cover" to="/">
-          <img :src="cate.picture" alt="" />
+          <img alt="" v-lazy="cate.picture" />
           <strong class="label">
             <span>{{ cate.name }}馆</span>
             <span>{{ cate.saleInfo }}</span>
