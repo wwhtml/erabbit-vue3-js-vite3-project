@@ -3,15 +3,26 @@ import { ref } from "vue";
 import HomePanel from "./home-panel.vue";
 import { findHot } from "@/api/home";
 import HomeSkeleton from "./home-skeleton.vue";
+
+import { useIntersectionObserver } from "@vueuse/core";
 const goods = ref([]);
-findHot().then((data) => {
-  goods.value = data.result;
+
+//dom
+const target = ref(null);
+
+const { stop } = useIntersectionObserver(target, ([{ isIntersecting }]) => {
+  if (isIntersecting) {
+    stop();
+    findHot().then((data) => {
+      goods.value = data.result;
+    });
+  }
 });
 </script>
 
 <template>
   <HomePanel title="人气推荐" sub-title="人气爆款 不容错过">
-    <div style="position: relative; height: 426px">
+    <div ref="target" style="position: relative; height: 426px">
       <Transition name="fade">
         <ul class="goods-list" v-if="goods.length">
           <li v-for="item in goods" :key="item.id">

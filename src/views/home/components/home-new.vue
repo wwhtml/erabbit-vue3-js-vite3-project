@@ -4,9 +4,19 @@ import HomeSkeleton from "./home-skeleton.vue";
 
 import { ref } from "vue";
 import { findNew } from "@/api/home";
+import { useIntersectionObserver } from "@vueuse/core";
 const goods = ref([]);
-findNew().then((data) => {
-  goods.value = data.result;
+
+//dom
+const target = ref(null);
+
+const { stop } = useIntersectionObserver(target, ([{ isIntersecting }]) => {
+  if (isIntersecting) {
+    stop();
+    findNew().then((data) => {
+      goods.value = data.result;
+    });
+  }
 });
 </script>
 
@@ -14,7 +24,7 @@ findNew().then((data) => {
   <div class="home-new">
     <HomePanel title="新鲜好物" sub-title="新鲜出炉 品质靠谱">
       <template #right><XtxMore path="/" /></template>
-      <div style="position: relative; height: 406px">
+      <div ref="target" style="position: relative; height: 406px">
         <Transition name="fade">
           <!-- 面板内容 -->
           <ul class="goods-list" v-if="goods.length">
