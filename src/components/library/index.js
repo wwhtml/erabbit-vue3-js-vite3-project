@@ -8,6 +8,18 @@ import XtxCarousel from "./xtx-carousel.vue";
 import XtxMore from "./xtx-more.vue";
 import defaultImg from "../../assets/images/200.png";
 
+// 插件可以是一个带 install() 方法的对象，亦或直接是一个将被用作 install() 方法的函数。插件选项 (app.use() 的第二个参数) 将会传递给插件的 install() 方法。
+export default {
+  install(app) {
+    // 在app上进行扩展，app提供 component directive 函数
+    // 如果要挂载原型 app.config.globalProperties 方式
+    app.component("XtxSkeleton", XtxSkeleton);
+    app.component("XtxCarousel", XtxCarousel);
+    app.component("XtxMore", XtxMore);
+    defineDirective(app);
+  },
+};
+
 // 定义指令
 const defineDirective = (app) => {
   // 1. 图片懒加载指令 v-lazy
@@ -16,6 +28,8 @@ const defineDirective = (app) => {
     // vue2.0 监听使用指令的DOM是否创建好，钩子函数：inserted
     // vue3.0 的指令拥有的钩子函数和组件的一样，使用指令的DOM是否创建好，钩子函数：mounted
     mounted(el, binding) {
+      el.src = defaultImg;
+
       // 2. 创建一个观察对象，来观察当前使用指令的元素
       const observe = new IntersectionObserver(
         ([{ isIntersecting }]) => {
@@ -39,16 +53,4 @@ const defineDirective = (app) => {
       observe.observe(el);
     },
   });
-};
-
-// 插件可以是一个带 install() 方法的对象，亦或直接是一个将被用作 install() 方法的函数。插件选项 (app.use() 的第二个参数) 将会传递给插件的 install() 方法。
-export default {
-  install(app) {
-    // 在app上进行扩展，app提供 component directive 函数
-    // 如果要挂载原型 app.config.globalProperties 方式
-    app.component("XtxSkeleton", XtxSkeleton);
-    app.component("XtxCarousel", XtxCarousel);
-    app.component("XtxMore", XtxMore);
-    defineDirective(app);
-  },
 };
