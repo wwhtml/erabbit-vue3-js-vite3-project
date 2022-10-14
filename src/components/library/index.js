@@ -12,6 +12,16 @@
 import defaultImg from "../../assets/images/200.png";
 
 const importFn = import.meta.globEager("./*.vue");
+console.log(importFn);
+
+//转换文件名格式
+var transform = function (str) {
+  let arr = str.split("-");
+  for (let i = 0; i < arr.length; i++) {
+    arr[i] = arr[i].slice(0, 1).toUpperCase() + arr[i].slice(1);
+  }
+  return arr.join("");
+};
 
 // 插件可以是一个带 install() 方法的对象，亦或直接是一个将被用作 install() 方法的函数。插件选项 (app.use() 的第二个参数) 将会传递给插件的 install() 方法。
 export default {
@@ -28,8 +38,10 @@ export default {
     Object.keys(importFn).forEach((key) => {
       // 导入组件
       const component = importFn[key].default;
+      console.log(component);
       // 注册组件
-      app.component(component.name, component);
+      //setup语法糖组件的name属性默认是vue文件名
+      app.component(transform(component.__name), component);
     });
     defineDirective(app);
   },

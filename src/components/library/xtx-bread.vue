@@ -1,7 +1,7 @@
 <script>
 import { h } from "vue";
 export default {
-  name: "XtxBread",
+  __name: "xtx-bread",
   render() {
     // 用法
     // 1. template 标签去除，单文件组件
