@@ -15,6 +15,8 @@ import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 //全局组件
 import ui from "./components/library";
 
+console.log(import.meta.env);
+
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 

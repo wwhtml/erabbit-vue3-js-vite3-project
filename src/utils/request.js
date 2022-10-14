@@ -10,7 +10,17 @@ import router from "@/router";
 const userStore = useUserStore();
 
 // 导出基准地址，原因：其他地方不是通过axios发请求的地方用上基准地址
-export const baseURL = "http://pcapi-xiaotuxian-front-devtest.itheima.net/";
+// export const baseURL = "https://pcapi-xiaotuxian-front-devtest.itheima.net/";
+
+console.log(import.meta.env);
+
+const baseURL =
+  import.meta.env.MODE === "production"
+    ? import.meta.env.VITE_APP_APIURL
+    : import.meta.env.VITE_APP_FLAG;
+
+console.log(baseURL);
+
 const instance = axios.create({
   // axios 的一些配置，baseURL  timeout
   baseURL,

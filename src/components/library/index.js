@@ -6,6 +6,9 @@
 import XtxSkeleton from "./xtx-skeleton.vue";
 import XtxCarousel from "./xtx-carousel.vue";
 import XtxMore from "./xtx-more.vue";
+import XtxBread from "./xtx-bread.vue";
+import XtxBreadItem from "./xtx-bread-item.vue";
+
 import defaultImg from "../../assets/images/200.png";
 
 // 插件可以是一个带 install() 方法的对象，亦或直接是一个将被用作 install() 方法的函数。插件选项 (app.use() 的第二个参数) 将会传递给插件的 install() 方法。
@@ -16,6 +19,8 @@ export default {
     app.component("XtxSkeleton", XtxSkeleton);
     app.component("XtxCarousel", XtxCarousel);
     app.component("XtxMore", XtxMore);
+    app.component("XtxBread", XtxBread);
+    app.component("XtxBreadItem", XtxBreadItem);
     defineDirective(app);
   },
 };
