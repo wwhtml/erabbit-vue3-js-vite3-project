@@ -56,8 +56,11 @@ watch(
       <!-- 面包屑 （全局注册面包屑组件）-->
       <XtxBread>
         <XtxBreadItem to="/">首页</XtxBreadItem>
-        <XtxBreadItem to="/category/1005000">电器</XtxBreadItem>
-        <XtxBreadItem>空调</XtxBreadItem>
+        <Transition name="fade-right" mode="out-in">
+          <XtxBreadItem :key="topCategory.id">{{
+            topCategory.name
+          }}</XtxBreadItem>
+        </Transition>
       </XtxBread>
       <!-- 轮包图 -->
       <XtxCarousel :sliders="sliders" style="height: 500px" />
