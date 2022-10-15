@@ -13,6 +13,7 @@ export const useCategoryStore = defineStore("category", {
       list: topCategory.map((item) => ({ name: item })),
     };
   },
+
   actions: {
     setCategory(headCategory) {
       this.list = headCategory;

@@ -5,16 +5,14 @@ import AppHeader from "@/components/app-header.vue";
 import AppFooter from "@/components/app-footer.vue";
 import AppHeaderSticky from "@/components/app-header-sticky.vue";
 
-import { nextTick } from "vue";
-
 //引入categoryStore
-import { useCategoryStore } from "../stores/category";
+import { useCategoryStore } from "@/stores/category";
 
 //使用categoryStroe,获取后端分类信息
 const categoryStore = useCategoryStore();
-nextTick(() => {
-  categoryStore.getList();
-});
+// nextTick(() => {
+categoryStore.getList();
+// });
 </script>
 
 <template>

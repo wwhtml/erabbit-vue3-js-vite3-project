@@ -10,7 +10,6 @@ const { list } = storeToRefs(categoryStore);
 
 //点击导航的a标签，让二级导航隐藏，通过一个open属性来控制，显示/隐藏（在categoryStore中设置）
 const show = (item) => {
-  console.log(11111);
   categoryStore.show(item);
 };
 

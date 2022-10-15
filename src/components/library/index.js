@@ -12,7 +12,7 @@
 import defaultImg from "../../assets/images/200.png";
 
 const importFn = import.meta.globEager("./*.vue");
-console.log(importFn);
+// console.log(importFn);
 
 //转换文件名格式
 var transform = function (str) {
@@ -38,7 +38,7 @@ export default {
     Object.keys(importFn).forEach((key) => {
       // 导入组件
       const component = importFn[key].default;
-      console.log(component);
+      // console.log(component);
       // 注册组件
       //setup语法糖组件的name属性默认是vue文件名
       app.component(transform(component.__name), component);
