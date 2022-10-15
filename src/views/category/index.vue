@@ -19,7 +19,7 @@ findBanner().then((data) => {
 //分类数据
 const categoryStore = useCategoryStore();
 const { list } = storeToRefs(categoryStore);
-console.log(list);
+// console.log(list);
 
 //路由
 const route = useRoute();
@@ -32,7 +32,7 @@ const topCategory = computed(() => {
   if (item) cate = item;
   return cate;
 });
-console.log(topCategory);
+// console.log(topCategory);
 
 //商品分类信息
 const subList = ref([]);
