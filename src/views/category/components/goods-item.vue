@@ -1,24 +1,26 @@
-<script setup>
-import { RouterLink } from "vue-router";
-const props = defineProps({
-  goods: {
-    type: Object,
-    default: () => {},
-  },
-});
-</script>
-
 <template>
-  <RouterLink to="/" class="goods-item">
-    <img :src="goods.picture" alt="" />
+  <RouterLink to="/" class="category-goods">
+    <img v-lazy="goods.picture" alt="" />
     <p class="name ellipsis">{{ goods.name }}</p>
     <p class="desc ellipsis">{{ goods.tag }}</p>
     <p class="price">&yen;{{ goods.price }}</p>
   </RouterLink>
 </template>
 
+<script>
+export default {
+  name: "CategoryGoods",
+  props: {
+    goods: {
+      type: Object,
+      default: () => {},
+    },
+  },
+};
+</script>
+
 <style scoped lang="less">
-.goods-item {
+.category-goods {
   display: block;
   width: 220px;
   padding: 20px 30px;

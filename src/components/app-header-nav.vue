@@ -1,4 +1,5 @@
 <script setup>
+import { RouterLink } from "vue-router";
 /* 为了从 Store 中提取属性同时保持其响应式，您需要使用storeToRefs()。 它将为任何响应式属性创建 refs。 */
 import { storeToRefs } from "pinia";
 import { useCategoryStore } from "../stores/category";

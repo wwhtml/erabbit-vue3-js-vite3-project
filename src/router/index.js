@@ -5,6 +5,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 // import Home from "@/views/home/index.vue";
 
 const Layout = () => import("@/views/Layout.vue");
+
 const Home = () => import("@/views/home/index.vue");
 const TopCategory = () => import("@/views/category/index.vue");
 const SubCategory = () => import("@/views/category/sub.vue");
