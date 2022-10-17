@@ -4,6 +4,10 @@ import { useRoute } from "vue-router";
 import { findGoods } from "../../api/product";
 
 import GoodsImage from "./components/goods-image.vue";
+import GoodsSales from "./components/goods-sales.vue";
+import GoodsName from "./components/goods-name.vue";
+import GoodsSku from "./components/goods-sku.vue";
+import GoodsRelevant from "./components/goods-relevant.vue";
 
 const useGoods = () => {
   const goods = ref(null);
@@ -14,9 +18,9 @@ const useGoods = () => {
       if (newVal && `/product/${newVal}` === route.path) {
         findGoods(route.params.id).then((data) => {
           goods.value = null;
-          // nextTick(() => {
-          goods.value = data.result;
-          // });
+          nextTick(() => {
+            goods.value = data.result;
+          });
         });
       }
     },
@@ -28,6 +32,10 @@ const useGoods = () => {
 const goods = useGoods();
 // console.log(goods);
 // provide("goods", goods);
+
+const changeSku = () => {
+  console.log("changeSku 功能能还未实现");
+};
 </script>
 
 <template>
@@ -49,9 +57,17 @@ const goods = useGoods();
       <div class="goods-info">
         <div class="media">
           <GoodsImage :images="goods.mainPictures" />
+          <GoodsSales />
         </div>
-        <div class="spec"></div>
+        <div class="spec">
+          <GoodsName :goods="goods" />
+          <!-- sku组件 skuId="1369155865461919746" 测试选中 -->
+          <GoodsSku :goods="goods" @change="changeSku" />
+        </div>
       </div>
+
+      <!-- 商品推荐 -->
+      <GoodsRelevant :goodsId="goods.id" />
     </div>
   </div>
 </template>
@@ -62,8 +78,8 @@ const goods = useGoods();
   background-color: #fff;
   display: flex;
   .media {
-    width: 500px;
-    height: 400px;
+    width: 580px;
+    height: 600px;
     padding: 30px 50px;
   }
   .spec {
