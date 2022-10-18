@@ -1,5 +1,5 @@
 <template>
-  <RouterLink to="/" class="category-goods">
+  <RouterLink to="/" class="goods-item">
     <img v-lazy="goods.picture" alt="" />
     <p class="name ellipsis">{{ goods.name }}</p>
     <p class="desc ellipsis">{{ goods.tag }}</p>
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-.category-goods {
+.goods-item {
   display: block;
   width: 220px;
   padding: 20px 30px;

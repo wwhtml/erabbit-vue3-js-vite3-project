@@ -8,6 +8,9 @@ import GoodsSales from "./components/goods-sales.vue";
 import GoodsName from "./components/goods-name.vue";
 import GoodsSku from "./components/goods-sku.vue";
 import GoodsRelevant from "./components/goods-relevant.vue";
+import GoodsTabs from "./components/goods-tabs.vue";
+import GoodsWarn from "./components/goods-warn.vue";
+import GoodsHot from "./components/goods-hot.vue";
 
 const useGoods = () => {
   const goods = ref(null);
@@ -31,7 +34,7 @@ const useGoods = () => {
 
 const goods = useGoods();
 // console.log(goods);
-// provide("goods", goods);
+provide("goods", goods);
 
 const changeSku = () => {
   console.log("changeSku 功能能还未实现");
@@ -68,6 +71,23 @@ const changeSku = () => {
 
       <!-- 商品推荐 -->
       <GoodsRelevant :goodsId="goods.id" />
+      <!-- 商品详情 -->
+      <div class="goods-footer">
+        <div class="goods-article">
+          <!-- 商品+评价 -->
+          <GoodsTabs :goods="goods" />
+          <!-- 注意事项 -->
+          <GoodsWarn />
+        </div>
+        <!-- 24小时热榜+周热销榜 -->
+        <div class="goods-aside">
+          <!-- 24热榜+周热销榜 -->
+          <div class="goods-aside">
+            <GoodsHot />
+            <GoodsHot :type="2" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -75,7 +95,7 @@ const changeSku = () => {
 <style scoped lang="less">
 .goods-info {
   min-height: 600px;
-  background-color: #fff;
+  background: #fff;
   display: flex;
   .media {
     width: 580px;
@@ -87,4 +107,25 @@ const changeSku = () => {
     padding: 30px 30px 30px 0;
   }
 }
+.goods-footer {
+  display: flex;
+  margin-top: 20px;
+  .goods-article {
+    width: 940px;
+    margin-right: 20px;
+  }
+  .goods-aside {
+    width: 280px;
+    min-height: 1000px;
+  }
+}
+// .goods-tabs {
+//   min-height: 600px;
+//   background: #fff;
+// }
+// .goods-warn {
+//   min-height: 600px;
+//   background: #fff;
+//   margin-top: 20px;
+// }
 </style>
