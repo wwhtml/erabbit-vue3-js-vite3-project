@@ -47,7 +47,7 @@ const changeCity = (result) => {
     </dl>
     <dl>
       <dt>配送</dt>
-      <!-- <dd>至 <XtxCity @change="changeCity" :fullLocation="fullLocation" /></dd> -->
+      <dd>至 <XtxCity @change="changeCity" :fullLocation="fullLocation" /></dd>
     </dl>
     <dl>
       <dt>服务</dt>
