@@ -36,8 +36,13 @@ const goods = useGoods();
 // console.log(goods);
 provide("goods", goods);
 
-const changeSku = () => {
-  console.log("changeSku 功能能还未实现");
+const changeSku = (sku) => {
+  // 修改商品的现价原价库存信息
+  if (sku.skuId) {
+    goods.value.price = sku.price;
+    goods.value.oldPrice = sku.oldPrice;
+    goods.value.inventory = sku.inventory;
+  }
 };
 </script>
 
