@@ -1,14 +1,19 @@
 <script setup>
-import { reactive, ref, watch } from "vue";
+import { reactive, ref, watch, onUnmounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import { useUserStore } from "@/stores/user.js";
+import { useIntervalFn } from "@vueuse/core";
 
 import schema from "@/utils/vee-validate-schema";
 import { Form, Field } from "vee-validate";
 import Message from "@/components/library/Message";
 
-import { userAccountLogin } from "@/api/user";
+import {
+  userAccountLogin,
+  userMobileLoginMsg,
+  userMobileLogin,
+} from "@/api/user";
 
 //store
 const userStore = useUserStore();
@@ -25,8 +30,8 @@ const isMsgLogin = ref(false);
 const form = reactive({
   isAgree: true,
   account: "xiaotuxian001",
-  password: null,
-  mobile: null,
+  password: "123456",
+  mobile: "13211112222", //验证码：默认是123456
   code: null,
 });
 
@@ -53,7 +58,43 @@ watch(isMsgLogin, () => {
 });
 
 //发送验证码
+// pause 暂停 resume 开始
+// useIntervalFn(回调函数,执行间隔,是否立即开启)
 const time = ref(0);
+const { pause, resume } = useIntervalFn(
+  () => {
+    time.value--;
+    if (time.value <= 0) {
+      pause();
+    }
+  },
+  1000,
+  false
+);
+onUnmounted(() => {
+  pause();
+});
+
+// 1. 发送验证码
+// 1.1 绑定发送验证码按钮点击事件
+// 1.2 校验手机号，如果成功才去发送短信（定义API），请求成功开启60s的倒计时，不能再次点击，倒计时结束恢复
+// 1.3 如果失败，失败的校验样式显示出来
+const send = async () => {
+  const valid = mySchema.mobile(form.mobile);
+  if (valid === true) {
+    // 通过
+    if (time.value === 0) {
+      // 没有倒计时才可以发送
+      await userMobileLoginMsg(form.mobile);
+      Message({ type: "success", text: "发送成功" });
+      time.value = 60;
+      resume();
+    }
+  } else {
+    // 失败，使用vee的错误函数显示错误信息 setFieldError(字段,错误信息)
+    formCom.value.setFieldError("mobile", valid);
+  }
+};
 
 //登录：需要在点击登录的时候对整体表单进行校验
 const login = async () => {
@@ -63,6 +104,25 @@ const login = async () => {
   if (valid) {
     if (!isMsgLogin.value) {
       userAccountLogin(form)
+        .then((data) => {
+          console.log(data);
+          //1、存储信息
+          const { id, account, nickname, avatar, token, mobile } = data.result;
+          userStore.setUser({ id, account, nickname, avatar, token, mobile });
+          //2、登陆成功之后，要给一个提示信息（封装一个message组件）
+          Message({ type: "success", text: "登录成功" });
+          //3、登陆成功之后，跳转页面
+          router.push(route.query.redirectUrl || "/");
+        })
+        .catch((e) => {
+          // 失败
+          Message({
+            type: "error",
+            text: e.response.data.message || "登录失败",
+          });
+        });
+    } else {
+      userMobileLogin(form)
         .then((data) => {
           console.log(data);
           //1、存储信息
@@ -167,7 +227,7 @@ const login = async () => {
               type="text"
               placeholder="请输入验证码"
             />
-            <span class="code">
+            <span @click="send()" class="code">
               {{ time === 0 ? "发送验证码" : `${time}秒后发送` }}
             </span>
           </div>
