@@ -10,9 +10,10 @@
 // import XtxBreadItem from "./xtx-bread-item.vue";
 
 import defaultImg from "../../assets/images/200.png";
+import Message from "./Message.js";
 
 const importFn = import.meta.globEager("./*.vue");
-// console.log(importFn);
+console.log(importFn);
 
 //转换文件名格式
 var transform = function (str) {
@@ -44,6 +45,8 @@ export default {
       app.component(transform(component.__name), component);
     });
     defineDirective(app);
+    // 定义一个原型函数
+    app.config.globalProperties.$message = Message;
   },
 };
 

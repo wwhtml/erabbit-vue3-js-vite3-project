@@ -1,15 +1,30 @@
 <script setup>
 import { reactive, ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
+
+import { useUserStore } from "@/stores/user.js";
 
 import schema from "@/utils/vee-validate-schema";
 import { Form, Field } from "vee-validate";
+import Message from "@/components/library/Message";
+
+import { userAccountLogin } from "@/api/user";
+
+//store
+const userStore = useUserStore();
+
+//router
+// 使用router
+const router = useRouter();
+// 使用route
+const route = useRoute();
 
 // 是否短信登录
 const isMsgLogin = ref(false);
 // 表单信息对象
 const form = reactive({
   isAgree: true,
-  account: null,
+  account: "xiaotuxian001",
   password: null,
   mobile: null,
   code: null,
@@ -45,6 +60,28 @@ const login = async () => {
   // Form组件提供了一个 validate 函数作为整体表单校验，当是返回的是一个promise
   const valid = await formCom.value.validate();
   console.log(valid);
+  if (valid) {
+    if (!isMsgLogin.value) {
+      userAccountLogin(form)
+        .then((data) => {
+          console.log(data);
+          //1、存储信息
+          const { id, account, nickname, avatar, token, mobile } = data.result;
+          userStore.setUser({ id, account, nickname, avatar, token, mobile });
+          //2、登陆成功之后，要给一个提示信息（封装一个message组件）
+          Message({ type: "success", text: "登录成功" });
+          //3、登陆成功之后，跳转页面
+          router.push(route.query.redirectUrl || "/");
+        })
+        .catch((e) => {
+          // 失败
+          Message({
+            type: "error",
+            text: e.response.data.message || "登录失败",
+          });
+        });
+    }
+  }
 };
 </script>
 
