@@ -13,6 +13,8 @@ export const useUserStore = defineStore("user", {
         mobile: "",
         token: "",
       },
+      // 登录后回跳路径
+      redirectUrl: "/",
       // },
     };
   },
@@ -25,6 +27,10 @@ export const useUserStore = defineStore("user", {
   actions: {
     setUser(payload) {
       this.profile = payload;
+    },
+    // 修改回跳地址
+    setRedirectUrl(url) {
+      this.redirectUrl = url;
     },
   },
 });

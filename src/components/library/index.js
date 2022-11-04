@@ -13,7 +13,7 @@ import defaultImg from "../../assets/images/200.png";
 import Message from "./Message.js";
 
 const importFn = import.meta.globEager("./*.vue");
-console.log(importFn);
+// console.log(importFn);
 
 //转换文件名格式
 var transform = function (str) {

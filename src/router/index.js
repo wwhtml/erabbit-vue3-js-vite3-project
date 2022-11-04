@@ -9,6 +9,7 @@ const TopCategory = () => import("@/views/category/index.vue");
 const SubCategory = () => import("@/views/category/sub.vue");
 const Goods = () => import("@/views/goods/index.vue");
 const Login = () => import("@/views/login/index.vue");
+const LoginCallback = () => import("../views/login/callback.vue");
 
 const routes = [
   {
@@ -23,6 +24,7 @@ const routes = [
     ],
   },
   { path: "/login", component: Login },
+  { path: "/login/callback", component: LoginCallback },
 ];
 
 const router = createRouter({

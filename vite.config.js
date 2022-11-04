@@ -11,9 +11,8 @@ console.log(ENV);
 // https://vitejs.dev/config/
 export default ({ mode }) => {
   const ENV1 = loadEnv(mode, process.cwd());
-  console.log(ENV1);
-  console.log(`/^${ENV1.VITE_APP_FLAG}/`);
-
+  // console.log(ENV1);
+  // console.log(`/^${ENV1.VITE_APP_FLAG}/`);
   return defineConfig({
     plugins: [vue()],
     resolve: {
@@ -23,7 +22,7 @@ export default ({ mode }) => {
     },
     server: {
       host: "0.0.0.0",
-      port: "8889",
+      port: "8080",
       proxy: {
         [ENV1.VITE_APP_FLAG]: {
           target: ENV1.VITE_APP_APIURL,
@@ -55,13 +54,16 @@ export default ({ mode }) => {
       },
     },
 
-    //需要配置10kb下的图片打包成base64的格式(vite.config.js使用下面的代码有用吗？)
-    chainWebpack: (config) => {
-      config.module
-        .rule("images")
-        .use("url-loader")
-        .loader("url-loader")
-        .tap((options) => Object.assign(options, { limit: 10000 }));
+    // configureWebpack: {
+    //   externals: {
+    //     qc: "QC",
+    //   },
+    // },
+    //上述是webpack的设置，不是vite的设置
+
+    build: {
+      //图片之类资源小于这个值就转为base64内联方式
+      assetsInlineLimit: 1000,
     },
   });
 };

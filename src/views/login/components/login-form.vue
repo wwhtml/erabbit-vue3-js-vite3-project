@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, watch, onUnmounted } from "vue";
+import { reactive, ref, watch, onMounted, onUnmounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 import { useUserStore } from "@/stores/user.js";
@@ -29,7 +29,7 @@ const isMsgLogin = ref(false);
 // 表单信息对象
 const form = reactive({
   isAgree: true,
-  account: "xiaotuxian001",
+  account: "q1419166157",
   password: "123456",
   mobile: "13211112222", //验证码：默认是123456
   code: null,
@@ -73,6 +73,14 @@ const { pause, resume } = useIntervalFn(
 );
 onUnmounted(() => {
   pause();
+});
+
+onMounted(() => {
+  // 组件渲染完毕，使用QC生成QQ登录按钮
+  QC.Login({
+    btnId: "qqLoginBtn",
+  });
+  console.log(111);
 });
 
 // 1. 发送验证码
@@ -254,10 +262,22 @@ const login = async () => {
     </Form>
 
     <div class="action">
-      <img
+      <!-- 点击图片，打开qq登录页面，然后登录qq账号，登陆成功之后回跳页面 -->
+      <!-- <img
         src="https://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"
         alt=""
-      />
+      /> -->
+      <!-- <span id="qqLoginBtn"></span> -->
+
+      <a
+        href="https://graph.qq.com/oauth2.0/authorize?client_id=100556005&response_type=token&scope=all&redirect_uri=http%3A%2F%2Fwww.corho.com%3A8080%2F%23%2Flogin%2Fcallback"
+      >
+        <img
+          src="https://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"
+          alt=""
+        />
+      </a>
+
       <div class="url">
         <a href="javascript:;">忘记密码</a>
         <a href="javascript:;">免费注册</a>

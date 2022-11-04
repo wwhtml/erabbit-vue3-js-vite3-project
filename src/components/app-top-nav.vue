@@ -12,6 +12,7 @@ const { profile } = userStore;
 const router = useRouter();
 const logout = () => {
   userStore.setUser({});
+  QC.Login.signOut();
   router.push("/login");
 };
 </script>
@@ -22,10 +23,7 @@ const logout = () => {
       <ul>
         <template v-if="profile.token">
           <li>
-            <RouterLink to="/member"
-              ><i class="iconfont icon-user"></i
-              >{{ profile.account }}</RouterLink
-            >
+            <a><i class="iconfont icon-user"></i>{{ profile.account }}</a>
           </li>
 
           <li><a href="javascript:;" @click="logout">退出登录</a></li>

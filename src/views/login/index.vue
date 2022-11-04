@@ -3,11 +3,23 @@ import LoginHeader from "./components/login-header.vue";
 import LoginFooter from "./components/login-footer.vue";
 import LoginForm from "./components/login-form.vue";
 
-import { Form, Field } from "vee-validate";
+//引入userStroe
+import { useUserStore } from "@/stores/user.js";
 
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 const activeName = ref("account");
+
+//存储回调地址（当前地址），提供将来QQ回调页面使用
+//userStore和route
+const userStore = useUserStore();
+const route = useRoute();
+const router = useRouter();
+console.log(route);
+console.log(router);
+console.log(route.query.redirectUrl);
+userStore.setRedirectUrl(route.query.redirectUrl || "/");
 </script>
 
 <template>
@@ -39,6 +51,7 @@ const activeName = ref("account");
     </div>
   </section>
   <LoginFooter />
+  <span id="qqLoginBtn"></span>
 </template>
 
 <style scoped lang="less">
