@@ -36,8 +36,8 @@ const isBind = ref(true);
 const router = useRouter();
 const userStore = useUserStore();
 
-console.log(userStore);
-console.log(userStore.redirectUrl);
+// console.log(userStore);
+// console.log(userStore.redirectUrl);
 
 // 确保QQ已经登录
 if (QC.Login.check()) {
